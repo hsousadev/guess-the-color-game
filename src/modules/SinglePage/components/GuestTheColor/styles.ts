@@ -1,16 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface ContainerProps {
-  gameStarted: boolean;
+  hasGameStarted: boolean;
+
+  selectColor: {
+    hex?: string;
+    rbg?: string;
+    hsl?: string;
+  };
 }
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
 
-  width: 20.25rem;
+  width: 24.25rem;
   margin-top: 6rem;
 
   h1 {
@@ -34,26 +40,40 @@ export const Container = styled.div`
       flex-direction: column;
 
       width: 100%;
-      gap: 0.5rem;
       height: 20.25rem;
 
-      background-color: orange;
+      ${(props) =>
+        props.hasGameStarted
+          ? css`
+              background-color: ${props.selectColor.hex};
+            `
+          : css`
+              background-color: var(--SOFT-GREY);
+            `}
 
-      input {
-        height: 1.75rem;
-        text-align: center;
-        border-radius: 0.25rem;
-        border: none;
-      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
 
-      button {
-        width: 8rem;
-        padding: 0.5rem;
-        font-size: 0.75rem;
-        border-radius: 0.25rem;
+        input {
+          height: 1.75rem;
+          text-align: center;
+          border-radius: 0.25rem;
+          border: none;
+        }
 
-        background-color: var(--DARK-GREY);
-        color: var(--WHITE);
+        button {
+          width: 8rem;
+          padding: 0.5rem;
+          font-size: 0.75rem;
+          border-radius: 0.25rem;
+
+          background-color: var(--DARK-GREY);
+          color: var(--WHITE);
+        }
       }
     }
   }

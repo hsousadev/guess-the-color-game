@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Context } from "../../../../../../../../pages/index";
 
 const AutoCounter = () => {
+  const { setGameStarted } = useContext(Context);
+
   const [time, setTime] = useState(30);
 
   useEffect(() => {
-    time > 0 && setTimeout(() => setTime(time - 1), 1000);
+    time > 0
+      ? setTimeout(() => setTime(time - 1), 1000)
+      : setGameStarted(false);
   }, [time]);
 
   return (

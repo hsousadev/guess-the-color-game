@@ -28,6 +28,7 @@ export const Container = styled.div`
   }
 
   .restart {
+    transition: all 0.4s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,10 +40,20 @@ export const Container = styled.div`
     border-right: 1px solid var(--DARK-GREY);
     border-left: 1px solid var(--DARK-GREY);
 
-    button {
-      margin: 0;
-      color: var(--WHITE);
-      font-size: 0.65rem;
+    margin: 0;
+    color: var(--WHITE);
+    font-size: 0.65rem;
+
+    :disabled {
+      cursor: not-allowed;
+      :hover {
+        background-color: var(--STRONG-GREY);
+      }
+    }
+
+    :hover {
+      transition: all 0.4s ease-in-out;
+      background-color: var(--DARK-GREY);
     }
   }
 
@@ -61,7 +72,8 @@ export const Container = styled.div`
     .score {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      padding: 0.5rem;
 
       width: 100%;
       height: 100%;

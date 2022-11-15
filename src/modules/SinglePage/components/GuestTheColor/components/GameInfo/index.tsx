@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../../../../pages/index";
 
 import AutoCounter from "./components/AutoCounter";
@@ -6,7 +6,12 @@ import AutoCounter from "./components/AutoCounter";
 import { Container } from "./styles";
 
 const GameInfo = () => {
-  const { hasGameStarted, setGameStarted } = useContext(Context);
+  const { hasGameStarted, setGameStarted, username } = useContext(Context);
+  const [user, setUser] = useState<String | null>();
+
+  useEffect(() => {
+    setUser(localStorage.getItem("username"));
+  }, [username]);
 
   return (
     <Container>
@@ -19,9 +24,15 @@ const GameInfo = () => {
           </h3>
         )}
       </div>
-      <div className="restart">
-        <button>RESTART</button>
-      </div>
+      {hasGameStarted ? (
+        <button className="restart" onClick={() => setGameStarted(false)}>
+          RESTART
+        </button>
+      ) : (
+        <button className="restart" disabled>
+          RESTART
+        </button>
+      )}
       <div className="points">
         <div className="score">
           <h3>
@@ -29,10 +40,13 @@ const GameInfo = () => {
           </h3>
 
           <strong>13</strong>
+
+          <h3>Henrique</h3>
         </div>
         <div className="score">
           <h3>SCORE</h3>
           <strong>13</strong>
+          <h3>{user}</h3>
         </div>
       </div>
     </Container>
