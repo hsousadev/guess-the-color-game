@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: var(--LIGHT-GREY);
   width: fit-content;
+  height: 100vh;
 
   h2 {
     padding: 1rem;
@@ -32,11 +33,16 @@ export const Container = styled.div`
   }
 
   .logs {
-    div:nth-child(1) div:first-child {
-      background-color: var(--LIGHT-GREY);
-    }
-    div:nth-child(2) div:last-child {
+    max-height: 424px;
+    overflow-y: scroll;
+
+    div:nth-child(n + 1) div:last-child {
       background-color: var(--REGULAR-GREY);
+      padding: 0.75rem;
+    }
+    div:nth-child(even) div:last-child {
+      background-color: var(--LIGHT-GREY);
+      padding: 0.75rem;
     }
   }
 `;

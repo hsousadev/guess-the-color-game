@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: var(--REGULAR-GREY);
-  padding: 0.75rem;
-
   .single-color,
   .double-color {
     display: flex;

@@ -8,8 +8,6 @@ interface ColorLogProps {
 }
 
 const ColorLog = ({ colors }: ColorLogProps) => {
-  console.log("colors.length", colors.length);
-
   return (
     <Container>
       {colors.length < 2 ? (
