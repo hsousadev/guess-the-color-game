@@ -5,11 +5,31 @@ import GameInfo from "./components/GameInfo";
 
 import { Container } from "./styles";
 
+interface ColorProps {
+  hex?: string;
+}
+
 const GuestTheColor = () => {
-  const { hasGameStarted, setGameStarted, username, setUsername, selectColor } =
-    useContext(Context);
+  const {
+    hasGameStarted,
+    setGameStarted,
+    username,
+    setUsername,
+    initialColors,
+    score,
+    setScore,
+  } = useContext(Context);
 
   const [user, setUser] = useState<String | null>();
+  const [selectColors, setSelectColors] = useState(initialColors);
+
+  useEffect(() => {
+    selectColors.sort(() => Math.random() - 0.5);
+  }, selectColors);
+
+  useEffect(() => {
+    setUser(localStorage.getItem("username"));
+  }, [username]);
 
   async function getColors() {
     const res = await fetch(
@@ -19,16 +39,15 @@ const GuestTheColor = () => {
     const data = await res.json();
     const colors = data;
 
-    console.log(colors);
+    setSelectColors(colors);
   }
 
-  useEffect(() => {
-    setUser(localStorage.getItem("username"));
-  }, [username]);
-
-  useEffect(() => {
+  function handleNewColor(color: HTMLInputElement) {
     getColors();
-  }, []);
+
+    if (color.value === selectColors[0].hex) setScore(score + 1);
+    else setScore(score - 1);
+  }
 
   function handleStartGame(event: FormEvent) {
     event.preventDefault();
@@ -47,7 +66,7 @@ const GuestTheColor = () => {
   }
 
   return (
-    <Container hasGameStarted={hasGameStarted} selectColor={selectColor}>
+    <Container hasGameStarted={hasGameStarted} selectColors={selectColors[0]}>
       <h1>Game has started</h1>
 
       <GameInfo />
@@ -87,9 +106,17 @@ const GuestTheColor = () => {
 
       {hasGameStarted && (
         <div id="answers" className="answers">
-          <button id="answer">#F2FBA5</button>
-          <button id="answer">#F85497</button>
-          <button id="answer">#F25214</button>
+          {selectColors.map((color: ColorProps, index: number) => (
+            <input
+              className="answer"
+              type="button"
+              key={index}
+              onClick={(event) =>
+                handleNewColor(event.target as HTMLInputElement)
+              }
+              value={color?.hex}
+            />
+          ))}
         </div>
       )}
     </Container>

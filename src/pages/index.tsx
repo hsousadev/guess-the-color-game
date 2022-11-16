@@ -7,57 +7,42 @@ import SinglePage from "../modules/SinglePage";
 interface GlobalContext {
   hasGameStarted: boolean;
   username: string;
-  selectColor: {
-    hex?: string;
-    rbg?: string;
-    hsl?: string;
-  };
+  initialColors: any;
+  score: number;
   setGameStarted: React.Dispatch<React.SetStateAction<boolean>>;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
-  setSelectColor: React.Dispatch<React.SetStateAction<Object>>;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Context = createContext<GlobalContext>({
+  score: 0,
   hasGameStarted: false,
   username: "",
-  selectColor: {
-    hex: "",
-    rbg: "",
-    hsl: "",
-  },
+  initialColors: [],
   setGameStarted: () => {},
   setUsername: () => {},
-  setSelectColor: () => {},
+  setScore: () => {},
 });
 
-interface colorProps {
-  color: {
-    hex?: string;
-    rbg?: string;
-    hsl?: string;
-  };
-}
-
 export async function getStaticProps() {
-  const res = await fetch("https://x-colors.herokuapp.com/api/random");
+  const res = await fetch("https://x-colors.herokuapp.com/api/random?number=3");
 
   const data = await res.json();
-  const color = data;
+  const initialColors = data;
 
   return {
     props: {
-      color,
+      initialColors,
     },
 
-    revalidate: 30,
+    revalidate: 5,
   };
 }
 
-export default function Home({ color }: colorProps) {
+export default function Home({ initialColors }: any) {
   const [hasGameStarted, setGameStarted] = useState(false);
   const [username, setUsername] = useState("");
-
-  const [selectColor, setSelectColor] = useState(color);
+  const [score, setScore] = useState(0);
 
   return (
     <Context.Provider
@@ -66,8 +51,9 @@ export default function Home({ color }: colorProps) {
         setGameStarted,
         username,
         setUsername,
-        selectColor,
-        setSelectColor,
+        initialColors,
+        score,
+        setScore,
       }}
     >
       <SinglePage />

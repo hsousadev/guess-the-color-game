@@ -2,12 +2,7 @@ import styled, { css } from "styled-components";
 
 interface ContainerProps {
   hasGameStarted: boolean;
-
-  selectColor: {
-    hex?: string;
-    rbg?: string;
-    hsl?: string;
-  };
+  selectColors: any;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -45,7 +40,7 @@ export const Container = styled.div<ContainerProps>`
       ${(props) =>
         props.hasGameStarted
           ? css`
-              background-color: ${props.selectColor.hex};
+              background-color: ${props?.selectColors?.hex};
             `
           : css`
               background-color: var(--SOFT-GREY);
@@ -87,12 +82,15 @@ export const Container = styled.div<ContainerProps>`
     border: 1px solid var(--DARK-GREY);
     border-radius: 0.25rem;
 
-    button:nth-child(2) {
+    .answer:nth-child(2) {
       border-left: 1px solid var(--DARK-GREY);
       border-right: 1px solid var(--DARK-GREY);
     }
 
-    button {
+    .answer {
+      transition: all 0.4s ease-in-out;
+      cursor: pointer;
+
       text-align: center;
       padding: 0.5rem;
       width: 100%;
@@ -100,6 +98,11 @@ export const Container = styled.div<ContainerProps>`
       background: transparent;
 
       color: var(--DARK-GREY);
+
+      :hover {
+        transition: all 0.4s ease-in-out;
+        background-color: var(--SOFT-GREY);
+      }
     }
   }
 `;

@@ -6,12 +6,17 @@ import AutoCounter from "./components/AutoCounter";
 import { Container } from "./styles";
 
 const GameInfo = () => {
-  const { hasGameStarted, setGameStarted, username } = useContext(Context);
+  const { hasGameStarted, setGameStarted, username, score, setScore } =
+    useContext(Context);
   const [user, setUser] = useState<String | null>();
 
   useEffect(() => {
     setUser(localStorage.getItem("username"));
   }, [username]);
+
+  useEffect(() => {
+    if (hasGameStarted) setScore(0);
+  }, [hasGameStarted]);
 
   return (
     <Container>
@@ -45,7 +50,7 @@ const GameInfo = () => {
         </div>
         <div className="score">
           <h3>SCORE</h3>
-          <strong>13</strong>
+          <strong>{score}</strong>
           <h3>{user}</h3>
         </div>
       </div>

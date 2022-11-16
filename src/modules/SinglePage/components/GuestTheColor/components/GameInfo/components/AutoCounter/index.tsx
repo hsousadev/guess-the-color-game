@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Context } from "../../../../../../../../pages/index";
 
 const AutoCounter = () => {
-  const { setGameStarted } = useContext(Context);
+  const { setGameStarted, hasGameStarted, score } = useContext(Context);
 
   const [time, setTime] = useState(30);
 
