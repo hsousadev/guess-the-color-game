@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../../../pages/index";
 
 import ColorLog from "./components/ColorLog";
 
 import { Container } from "./styles";
 
 const GameLogs = () => {
+  const { gameLogs } = useContext(Context);
+
   return (
     <Container>
       <h2>Current/Latest game</h2>
@@ -20,21 +23,17 @@ const GameLogs = () => {
       </div>
 
       <div className="logs">
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
-        <ColorLog colors={["#784587"]} />
-        <ColorLog colors={["#784587", "#456320"]} />
+        {gameLogs?.length > 0 &&
+          gameLogs?.map((log, index) =>
+            !log?.guessedColor ? (
+              <ColorLog key={index} colors={[log.correctColor]} />
+            ) : (
+              <ColorLog
+                key={index}
+                colors={[log.guessedColor, log.correctColor]}
+              />
+            )
+          )}
       </div>
     </Container>
   );

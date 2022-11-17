@@ -6,8 +6,16 @@ import AutoCounter from "./components/AutoCounter";
 import { Container } from "./styles";
 
 const GameInfo = () => {
-  const { hasGameStarted, setGameStarted, username, score, setScore } =
-    useContext(Context);
+  const {
+    hasGameStarted,
+    setGameStarted,
+    username,
+    score,
+    setScore,
+    highScore,
+    setHighScore,
+    setGameLogs,
+  } = useContext(Context);
   const [user, setUser] = useState<String | null>();
 
   useEffect(() => {
@@ -15,7 +23,17 @@ const GameInfo = () => {
   }, [username]);
 
   useEffect(() => {
-    if (hasGameStarted) setScore(0);
+    const highScore = localStorage.getItem("highscore");
+    if (highScore) {
+      setHighScore(JSON.parse(highScore));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (hasGameStarted) {
+      setScore(0);
+      setGameLogs([]);
+    }
   }, [hasGameStarted]);
 
   return (
@@ -44,9 +62,9 @@ const GameInfo = () => {
             HIGH <br /> SCORE
           </h3>
 
-          <strong>13</strong>
+          <strong>{highScore.score}</strong>
 
-          <h3>Henrique</h3>
+          <h3>{highScore.username}</h3>
         </div>
         <div className="score">
           <h3>SCORE</h3>

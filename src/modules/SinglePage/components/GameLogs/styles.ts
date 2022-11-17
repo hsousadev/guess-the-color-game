@@ -35,6 +35,8 @@ export const Container = styled.div`
   .logs {
     max-height: 424px;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
 
     div:nth-child(n + 1) div:last-child {
       background-color: var(--REGULAR-GREY);

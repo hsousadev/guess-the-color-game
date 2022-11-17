@@ -11,21 +11,22 @@ interface ColorProps {
 
 const GuestTheColor = () => {
   const {
-    hasGameStarted,
-    setGameStarted,
     username,
-    setUsername,
-    initialColors,
     score,
+    gameLogs,
+    hasGameStarted,
+    initialColors,
+    setUsername,
     setScore,
+    setGameLogs,
+    setGameStarted,
   } = useContext(Context);
 
   const [user, setUser] = useState<String | null>();
   const [selectColors, setSelectColors] = useState(initialColors);
-
-  useEffect(() => {
-    selectColors.sort(() => Math.random() - 0.5);
-  }, selectColors);
+  const [bgColor, setBgColor] = useState(
+    initialColors[Math.floor(Math.random() * initialColors.length)].hex
+  );
 
   useEffect(() => {
     setUser(localStorage.getItem("username"));
@@ -40,13 +41,26 @@ const GuestTheColor = () => {
     const colors = data;
 
     setSelectColors(colors);
+    setBgColor(colors[Math.floor(Math.random() * colors.length)].hex);
   }
 
   function handleNewColor(color: HTMLInputElement) {
-    getColors();
+    if (color.value === bgColor) {
+      setScore(score + 1);
 
-    if (color.value === selectColors[0].hex) setScore(score + 1);
-    else setScore(score - 1);
+      setGameLogs([...gameLogs, { correctColor: color.value }]);
+    } else {
+      setGameLogs([
+        ...gameLogs,
+        { guessedColor: color.value, correctColor: bgColor },
+      ]);
+
+      if (score > 0) {
+        setScore(score - 1);
+      }
+    }
+
+    getColors();
   }
 
   function handleStartGame(event: FormEvent) {
@@ -66,7 +80,7 @@ const GuestTheColor = () => {
   }
 
   return (
-    <Container hasGameStarted={hasGameStarted} selectColors={selectColors[0]}>
+    <Container hasGameStarted={hasGameStarted} bgColor={bgColor}>
       <h1>Game has started</h1>
 
       <GameInfo />

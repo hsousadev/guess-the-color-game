@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 interface ContainerProps {
   hasGameStarted: boolean;
-  selectColors: any;
+  bgColor: string;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -40,7 +40,7 @@ export const Container = styled.div<ContainerProps>`
       ${(props) =>
         props.hasGameStarted
           ? css`
-              background-color: ${props?.selectColors?.hex};
+              background-color: ${props?.bgColor};
             `
           : css`
               background-color: var(--SOFT-GREY);
