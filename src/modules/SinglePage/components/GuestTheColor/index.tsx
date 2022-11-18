@@ -26,7 +26,7 @@ const GuestTheColor = () => {
   const [user, setUser] = useState<String | null>();
   const [selectColors, setSelectColors] = useState(initialColors);
   const [bgColor, setBgColor] = useState(
-    initialColors[Math.floor(Math.random() * initialColors.length)].hex
+    initialColors[Math.floor(Math.random() * initialColors.length)]?.hex
   );
 
   let timeoutRef: any = useRef(null);
@@ -56,7 +56,7 @@ const GuestTheColor = () => {
     const colors = data;
 
     setSelectColors(colors);
-    setBgColor(colors[Math.floor(Math.random() * colors.length)].hex);
+    setBgColor(colors[Math.floor(Math.random() * colors.length)]?.hex);
     setBtnDisabled(false);
 
     countdown(0);
@@ -66,7 +66,7 @@ const GuestTheColor = () => {
     setBtnDisabled(true);
 
     if (color.value === bgColor) {
-      setScore(score + 1);
+      setScore(score + 5);
 
       setGameLogs([
         ...gameLogs,
@@ -121,7 +121,7 @@ const GuestTheColor = () => {
 
       <div className="color-view">
         <div className="bar" />
-        <div className="color">
+        <div data-testid="color" className="color">
           {!hasGameStarted && (
             <form onSubmit={handleStartGame} action="">
               <label htmlFor="username"></label>
@@ -130,7 +130,7 @@ const GuestTheColor = () => {
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="Username"
+                  placeholder="username"
                   maxLength={15}
                   minLength={3}
                   defaultValue={String(user)}
@@ -140,7 +140,7 @@ const GuestTheColor = () => {
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="Username"
+                  placeholder="username"
                   maxLength={15}
                   minLength={3}
                 />

@@ -30,7 +30,7 @@ const GameLogs = () => {
         <h3>Score</h3>
       </div>
 
-      <div ref={ref} id="logs" className="logs">
+      <div data-testid="logs" ref={ref} id="logs" className="logs">
         {gameLogs?.length > 0 &&
           gameLogs?.map((log, index) =>
             !log?.guessedColor ? (
