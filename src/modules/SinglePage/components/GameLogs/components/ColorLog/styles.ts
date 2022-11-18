@@ -5,8 +5,7 @@ export const Container = styled.div`
   .double-color {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 0.5rem;
+    justify-content: space-between;
   }
 
   .colors {
@@ -19,7 +18,6 @@ export const Container = styled.div`
 
   .color {
     width: 100%;
-    max-width: 140px;
     padding: 0.75rem;
     border-radius: 0.25rem;
 

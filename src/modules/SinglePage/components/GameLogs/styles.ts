@@ -33,8 +33,8 @@ export const Container = styled.div`
   }
 
   .logs {
-    max-height: 424px;
-    overflow-y: scroll;
+    max-height: 400px;
+    overflow: auto;
     display: flex;
     flex-direction: column-reverse;
 

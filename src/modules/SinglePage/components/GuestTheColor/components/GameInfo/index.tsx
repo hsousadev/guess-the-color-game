@@ -36,6 +36,11 @@ const GameInfo = () => {
     }
   }, [hasGameStarted]);
 
+  function handleEndGame() {
+    localStorage.setItem("hasgamestarted", "false");
+    setGameStarted(false);
+  }
+
   return (
     <Container>
       <div className="time">
@@ -48,7 +53,7 @@ const GameInfo = () => {
         )}
       </div>
       {hasGameStarted ? (
-        <button className="restart" onClick={() => setGameStarted(false)}>
+        <button className="restart" onClick={() => handleEndGame()}>
           RESTART
         </button>
       ) : (

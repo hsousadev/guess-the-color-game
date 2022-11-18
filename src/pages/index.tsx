@@ -5,6 +5,7 @@ import SinglePage from "../modules/SinglePage";
 interface ColorLogProps {
   guessedColor: string;
   correctColor: string;
+  seconds: number;
 }
 interface GlobalContext {
   hasGameStarted: boolean;

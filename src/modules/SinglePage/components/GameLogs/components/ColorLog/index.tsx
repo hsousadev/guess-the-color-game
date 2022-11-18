@@ -5,9 +5,10 @@ import { Container } from "./styles";
 
 interface ColorLogProps {
   colors: Array<string>;
+  seconds: number;
 }
 
-const ColorLog = ({ colors }: ColorLogProps) => {
+const ColorLog = ({ colors, seconds }: ColorLogProps) => {
   return (
     <Container>
       {colors.length < 2 ? (
@@ -22,7 +23,7 @@ const ColorLog = ({ colors }: ColorLogProps) => {
               fill="green"
               weight="duotone"
             />
-            2s
+            {seconds}s
           </div>
         </div>
       ) : (
@@ -42,7 +43,7 @@ const ColorLog = ({ colors }: ColorLogProps) => {
               weight="duotone"
               fill="red"
             />
-            2s
+            {seconds}s
           </div>
         </div>
       )}

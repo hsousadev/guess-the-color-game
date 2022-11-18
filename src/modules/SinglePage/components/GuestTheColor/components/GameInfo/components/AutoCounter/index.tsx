@@ -8,6 +8,8 @@ const AutoCounter = () => {
 
   function handleEndGame() {
     setGameStarted(false);
+    localStorage.setItem("hasgamestarted", "false");
+
     const highScore = localStorage.getItem("highscore");
 
     if (!highScore) {
