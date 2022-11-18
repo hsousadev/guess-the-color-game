@@ -1,5 +1,8 @@
 # 🔴🔵🟢 Guess the color game
 
+
+![image](https://user-images.githubusercontent.com/54003876/202641228-f571d2cd-c486-473e-ae5d-416e91646aca.png)
+
 Instruções para JOGAR! Por build ou pela site vercel. 
 
 
