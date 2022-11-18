@@ -115,7 +115,7 @@ const GuestTheColor = () => {
 
   return (
     <Container hasGameStarted={hasGameStarted} bgColor={bgColor}>
-      <h1>Game has started</h1>
+      <h1>Guess the color</h1>
 
       <GameInfo />
 

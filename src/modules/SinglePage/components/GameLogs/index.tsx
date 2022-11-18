@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { Context } from "../../../../pages/index";
 
+
+
 import ColorLog from "./components/ColorLog";
 
 import { Container } from "./styles";
 
 const GameLogs = () => {
+  
   const { gameLogs } = useContext(Context);
   const ref = useRef<null | HTMLDivElement>(null);
 

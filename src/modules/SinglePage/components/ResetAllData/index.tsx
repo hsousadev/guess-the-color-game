@@ -4,8 +4,7 @@ import { Container } from "./styles";
 
 const ResetAllData = () => {
   function handleResetAllData() {
-    localStorage.setItem("username", "");
-    localStorage.setItem("highscore", "");
+    localStorage.clear();
     window.location.reload();
   }
 
